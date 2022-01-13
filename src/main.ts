@@ -1,6 +1,6 @@
-import { createApp } from "vue";
+import { createApp } from 'vue'
 // import HelloWorld from "./components/HelloWorld.vue";
-import App from "./App";
+import App from './App'
 
 // const App = defineComponent({
 //   setup() {
@@ -23,4 +23,4 @@ import App from "./App";
 //   },
 // });
 
-createApp(App).mount("#app");
+createApp(App).mount('#app')
