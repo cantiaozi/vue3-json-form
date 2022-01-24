@@ -184,7 +184,7 @@ export default defineComponent({
               <SchemaForm
                 schema={demo.schema}
                 value={demo.data}
-                onChange={handleDataChange}
+                onChange={handleChange}
               />
               {/* <SchemaForm
                 schema={demo.schema!}
