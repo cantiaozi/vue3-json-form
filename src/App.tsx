@@ -120,6 +120,8 @@ export default defineComponent({
         ;(demo as any)[`${filed}Code`] = value
       } catch (err) {
         // some thing
+        demo[filed] = value
+        ;(demo as any)[`${filed}Code`] = value
       }
     }
 

@@ -1,3 +1,5 @@
+import { PropType } from 'vue'
+
 export enum SchemaType {
   STRING = 'string',
   NUMBER = 'number',
@@ -27,3 +29,17 @@ export type Schema = {
   additionalProperties?: any
   additionalItems?: Schema
 }
+
+export const FormItemProps = {
+  schema: {
+    type: Object as PropType<Schema>,
+    required: true,
+  },
+  value: {
+    required: true,
+  },
+  onChange: {
+    type: Function as PropType<(args: any) => void>,
+    required: true,
+  },
+} as const
