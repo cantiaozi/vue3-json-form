@@ -1,26 +1,21 @@
-import { defineComponent, PropType } from 'vue'
-import { Schema, SchemaType } from './types'
+import { computed, defineComponent, PropType } from 'vue'
+import { Schema, SchemaType, FormItemProps } from './types'
 import StringField from './fields/StringField.vue'
 import NumberField from './fields/NumberField.vue'
+import ObjectField from './fields/ObjectField'
+import { retrieveSchema } from './utils'
 
 export default defineComponent({
   name: 'SchemaItem',
-  props: {
-    schema: {
-      type: Object as PropType<Schema>,
-      required: true,
-    },
-    value: {
-      required: true,
-    },
-    onChange: {
-      type: Function as PropType<(args: any) => void>,
-      required: true,
-    },
-  },
+  props: FormItemProps,
   setup(props) {
+    const retrieveSchemaRef = computed(() => {
+      const { schema, rootSchema, value } = props
+      return retrieveSchema(schema, rootSchema, value)
+    })
     return () => {
       let componet: any
+      const retrieveSchema = retrieveSchemaRef.value
       switch (props.schema.type) {
         case SchemaType.STRING:
           componet = StringField
@@ -28,11 +23,13 @@ export default defineComponent({
         case SchemaType.NUMBER:
           componet = NumberField
           break
-
+        case SchemaType.OBJECT:
+          componet = ObjectField
+          break
         default:
           break
       }
-      return <componet {...props} />
+      return <componet {...props} schema={retrieveSchema} />
     }
   },
 })
