@@ -4,7 +4,6 @@ import StringField from './fields/StringField.vue'
 import NumberField from './fields/NumberField.vue'
 import ObjectField from './fields/ObjectField'
 import { retrieveSchema } from './utils'
-
 export default defineComponent({
   name: 'SchemaItem',
   props: FormItemProps,

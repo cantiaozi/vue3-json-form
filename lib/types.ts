@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import { PropType, DefineComponent } from 'vue'
 
 export enum SchemaType {
   STRING = 'string',
@@ -16,7 +16,7 @@ export type Schema = {
   title?: string
   default?: any
   properties?: {
-    [key: string]: Schema | { $ref: string }
+    [key: string]: Schema
   }
   items?: Schema | Schema[] | SchemaRef
   uniqueItems?: any
@@ -61,3 +61,10 @@ export const FormItemProps = {
     required: true,
   },
 } as const
+
+// SchemaForm组件中的provide方法中的第二个参数的类型
+export interface SchemaFormProvide {
+  //typeof这里的用法是在类型中的作用，而不是赋值中的作用
+  //typeof在类型中的作用是将后面的参数推断为类型
+  SchemaItem: any
+}
