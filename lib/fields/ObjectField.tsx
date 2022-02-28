@@ -1,15 +1,14 @@
 import { defineComponent, inject, DefineComponent } from 'vue'
 import { FormItemProps, SchemaFormProvide } from '../types'
-import { SchemaFormProvideKey } from '../context'
 import { isObject } from '../utils'
-type SchemaItemDefine = DefineComponent<typeof FormItemProps>
+import { useFormItem } from '../hooks/index'
+import { Form, Field } from 'vant'
 export default defineComponent({
   name: 'ObjectField',
   props: FormItemProps,
   setup(props) {
     const { schema, rootSchema, onChange } = props
-    const context = inject<SchemaFormProvide>(SchemaFormProvideKey)
-    const SchemaItem: SchemaItemDefine = context!.SchemaItem
+    const SchemaItem = useFormItem()
     const properties = schema.properties || {}
     const value: any = isObject(props.value) ? props.value : {}
     const handleChange = (key: string, val: any) => {
@@ -21,17 +20,21 @@ export default defineComponent({
       onChange(value)
     }
     return () => {
-      return Object.keys(properties).map((key: string, index: number) => {
-        return (
-          <SchemaItem
-            schema={properties[key]}
-            value={value[key]}
-            rootSchema={rootSchema}
-            onChange={(val: any) => handleChange(key, val)}
-            key={index}
-          ></SchemaItem>
-        )
-      })
+      return (
+        // <Form>
+        Object.keys(properties).map((key: string, index: number) => {
+          return (
+            <SchemaItem
+              schema={properties[key]}
+              value={value[key]}
+              rootSchema={rootSchema}
+              onChange={(val: any) => handleChange(key, val)}
+              key={index}
+            ></SchemaItem>
+          )
+        })
+        // </Form>
+      )
     }
   },
 })

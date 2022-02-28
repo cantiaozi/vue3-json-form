@@ -3,6 +3,7 @@ import { Schema, SchemaType, FormItemProps } from './types'
 import StringField from './fields/StringField.vue'
 import NumberField from './fields/NumberField.vue'
 import ObjectField from './fields/ObjectField'
+import ArrayField from './fields/ArrayField'
 import { retrieveSchema } from './utils'
 export default defineComponent({
   name: 'SchemaItem',
@@ -24,6 +25,9 @@ export default defineComponent({
           break
         case SchemaType.OBJECT:
           componet = ObjectField
+          break
+        case SchemaType.ARRAY:
+          componet = ArrayField
           break
         default:
           break

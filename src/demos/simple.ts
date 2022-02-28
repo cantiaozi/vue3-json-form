@@ -3,7 +3,7 @@ export default {
   name: 'Simple',
   schema: {
     description: 'A simple form example.',
-    type: 'string',
+    type: 'object',
     required: ['firstName', 'lastName'],
     properties: {
       firstName: {
@@ -16,6 +16,30 @@ export default {
       telephone: {
         type: 'string',
         minLength: 10,
+      },
+      staticArray: {
+        type: 'array',
+        items: [
+          {
+            type: 'string',
+          },
+          {
+            type: 'number',
+          },
+        ],
+      },
+      singTypeArray: {
+        type: 'array',
+        items: {
+          type: 'string',
+        },
+      },
+      multiSelectArray: {
+        type: 'array',
+        items: {
+          type: 'string',
+          enum: ['123', '456', '789'],
+        },
       },
     },
   },
@@ -39,5 +63,6 @@ export default {
     age: 75,
     bio: 'Roundhouse kicking asses since 1940',
     password: 'noneed',
+    singTypeArray: ['bilibili'],
   },
 }
